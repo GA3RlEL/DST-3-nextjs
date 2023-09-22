@@ -11,9 +11,14 @@ module.exports = {
         "bg-color": "#191c1a",
         "btn-primary": "#0071e3",
       },
+
       gridTemplateRows: {
         grid1remauto1rem: "4rem 1fr 2rem",
         gridauto1fr: "auto 1fr",
+        grifform: "6fr 4fr",
+      },
+      gridTemplateColumns: {
+        grifform: "80fr 20fr",
       },
     },
   },
