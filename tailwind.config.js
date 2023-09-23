@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         "bg-color": "#191c1a",
         "btn-primary": "#0071e3",
+        "secondary-color": "#86868b",
       },
 
       gridTemplateRows: {
@@ -19,6 +20,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         grifform: "80fr 20fr",
+        taksItemCol: "auto 1fr",
       },
     },
   },
