@@ -75,6 +75,8 @@ export default function CreateForm() {
             <div className="flex justify-between gap-4">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                  format="DD/MM/YYYY"
+                  disablePast
                   required
                   label="Date"
                   value={date}
@@ -83,7 +85,9 @@ export default function CreateForm() {
               </LocalizationProvider>
               <button
                 disabled={sending}
-                className=" transition-all uppercase px-6 py-2 border-solid border-green-600 border-2 rounded-md hover:text-white hover:bg-green-600 "
+                className={` transition-all uppercase px-6 py-2 border-solid border-green-600 border-2 rounded-md hover:text-white hover:bg-green-600 ${
+                  sending && "border-gray-600 text-gray-600"
+                }`}
               >
                 {!sending && "Add"}
                 {sending && "Sending"}

@@ -2,6 +2,7 @@
 
 const { useContext, useState, createContext } = require("react");
 
+import dayjs from "dayjs";
 import { db } from "../firebase/firebase";
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 
@@ -11,7 +12,7 @@ export default function CreateContextProvider({ children }) {
   const [selectTag, setSelectTag] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(dayjs());
 
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ export default function CreateContextProvider({ children }) {
     setSelectTag(e.target.value);
   }
   function handleDate(e) {
-    setDate(e.format("DD/MM/YYYY"));
+    setDate(e);
   }
 
   async function handleCreate(e) {
@@ -57,11 +58,11 @@ export default function CreateContextProvider({ children }) {
       await addDoc(collection(db, "tasks"), {
         title,
         body: details,
-        date,
+        date: date.format("DD/MM/YYYY"),
         tag: selectTag,
       });
       setTitle("");
-      setDate("");
+      setDate(dayjs());
       setDetails("");
       setSelectTag("");
     } catch (error) {
