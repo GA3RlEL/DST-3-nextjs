@@ -57,12 +57,14 @@ export default function AddButton() {
             <ModeEditIcon className="text-2xl" />
           </div>
         </li>
-        <li className="flex items-center gap-4 min-w-[92px] justify-center">
-          Tag
-          <div className="bg-btn-primary rounded-full p-2 felx items-center justify-center">
-            <TagIcon className="text-2xl" />
-          </div>
-        </li>
+        <Link href="/tags">
+          <li className="flex items-center gap-4 min-w-[92px] justify-center">
+            Tag
+            <div className="bg-btn-primary rounded-full p-2 felx items-center justify-center">
+              <TagIcon className="text-2xl" />
+            </div>
+          </li>
+        </Link>
         <Link href="/create">
           <li className="flex items-center gap-4 justify-center min-w-[92px] ">
             Task

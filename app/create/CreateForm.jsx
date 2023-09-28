@@ -34,10 +34,10 @@ export default function CreateForm() {
 
   useEffect(() => {
     getTags();
-  }, [getTags]);
+  }, []);
 
   return (
-    <Box className="justify-self-center self-center  max-w-3xl w-full px-3 flex items-center justify-center">
+    <Box className="justify-self-center self-center  max-w-3xl w-full px-3 flex items-center justify-center relative">
       {loading && <p>Loading ...</p>}
       {error && <p>{error}</p>}
       {!loading && !error && (

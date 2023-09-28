@@ -1,18 +1,20 @@
-import AddNotification from "./AddNotification";
+import React from "react";
+
 import BackArrow from "../Components/BackArrow";
 import Footer from "../Components/Footer";
+import AddNotification from "./AddNotification";
 import Header from "../Components/Header";
+import TagsSection from "./TagsSection";
 
-import CreateForm from "./CreateForm";
-export default function CreateTask() {
+export default function Tags() {
   return (
     <div className="h-screen grid grid-rows-[auto_1fr_auto]">
       <Header>
         <BackArrow />
       </Header>
-      <CreateForm />
+      <TagsSection />
       <Footer />
-      <AddNotification>Task</AddNotification>
+      <AddNotification>Tag</AddNotification>
     </div>
   );
 }

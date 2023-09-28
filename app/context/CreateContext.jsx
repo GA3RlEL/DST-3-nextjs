@@ -14,6 +14,8 @@ export default function CreateContextProvider({ children }) {
   const [details, setDetails] = useState("");
   const [date, setDate] = useState(dayjs());
 
+  const [success, setSuccess] = useState(false);
+
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -37,6 +39,10 @@ export default function CreateContextProvider({ children }) {
       setLoading(false);
     }
   };
+
+  function handleCloseSuccess() {
+    setSuccess(false);
+  }
 
   function handleDetails(e) {
     setDetails(e.target.value);
@@ -65,6 +71,7 @@ export default function CreateContextProvider({ children }) {
       setDate(dayjs());
       setDetails("");
       setSelectTag("");
+      setSuccess(true);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -89,6 +96,8 @@ export default function CreateContextProvider({ children }) {
         handleDate,
         handleCreate,
         sending,
+        success,
+        handleCloseSuccess,
       }}
     >
       {children}

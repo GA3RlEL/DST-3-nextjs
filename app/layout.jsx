@@ -1,4 +1,5 @@
 import CreateContextProvider from "./context/CreateContext";
+import TagsContextProvider from "./context/TagsContext";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 
@@ -13,7 +14,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <CreateContextProvider>{children}</CreateContextProvider>
+        <TagsContextProvider>
+          <CreateContextProvider>{children}</CreateContextProvider>
+        </TagsContextProvider>
       </body>
     </html>
   );
