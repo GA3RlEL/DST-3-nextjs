@@ -5,6 +5,7 @@ import Footer from "../Components/Footer";
 import AddNotification from "./AddNotification";
 import Header from "../Components/Header";
 import TagsSection from "./TagsSection";
+import ConfirmDelete from "./ConfirmDelete";
 
 export default function Tags() {
   return (
@@ -15,6 +16,7 @@ export default function Tags() {
       <TagsSection />
       <Footer />
       <AddNotification>Tag</AddNotification>
+      <ConfirmDelete />
     </div>
   );
 }

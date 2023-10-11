@@ -2,7 +2,15 @@
 
 const { createContext, useContext, useState } = require("react");
 
-import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  query,
+  deleteDoc,
+  where,
+  doc,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 const TagsContext = createContext(null);
@@ -18,7 +26,44 @@ export default function TagsContextProvider({ children }) {
 
   const [success, setSuccess] = useState(false);
 
-  const [timer, setTimer] = useState(0);
+  // Delete Logic
+  const [isDelete, setIsDelete] = useState(false);
+  const [deleteName, setDeleteName] = useState("");
+  const [deleteId, setDeleteId] = useState(null);
+
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+
+  function takeItemToDelete(id, name) {
+    setIsDelete(true);
+    setDeleteName(name);
+    setDeleteId(id);
+  }
+
+  async function handleDelete() {
+    if (!deleteId) return;
+    try {
+      setDeleteLoading(true);
+      const docRef = doc(db, "tags", deleteId);
+      await deleteDoc(docRef);
+    } catch (error) {
+      setDeleteError(error);
+      console.log(error);
+    } finally {
+      setDeleteLoading(false);
+      setIsDelete(false);
+      setDeleteName("");
+      setDeleteId("");
+    }
+  }
+
+  function cancelDelete() {
+    setIsDelete(false);
+    setDeleteName("");
+    setDeleteId("");
+  }
+
+  ////////////////////////////////////////
 
   const getTags = async () => {
     setLoading(true);
@@ -50,9 +95,6 @@ export default function TagsContextProvider({ children }) {
       setSuccess(true);
       setTagName("");
       setColor("#000000");
-      if (t) {
-        clearTimeout(t);
-      }
     } catch (error) {
       setError(error.message);
     } finally {
@@ -86,7 +128,13 @@ export default function TagsContextProvider({ children }) {
         handleCreate,
         success,
         handleCloseSuccess,
-        timer,
+        isDelete,
+        setIsDelete,
+        deleteName,
+        takeItemToDelete,
+        handleDelete,
+        deleteLoading,
+        cancelDelete,
       }}
     >
       {children}

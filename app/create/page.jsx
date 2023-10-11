@@ -12,6 +12,7 @@ export default function CreateTask() {
       </Header>
       <CreateForm />
       <Footer />
+
       <AddNotification>Task</AddNotification>
     </div>
   );
