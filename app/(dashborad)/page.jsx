@@ -1,9 +1,13 @@
+"use client";
+
 import AddButton from "../Components/AddButton";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
+import { useUserContext } from "../context/AuthContext";
 import TicketList from "./TaskList";
 
 export default function Home() {
+  const { user } = useUserContext();
   return (
     <div className="container max-w-full grid-rows-[auto_1fr_auto] relative">
       <Header />
@@ -11,7 +15,7 @@ export default function Home() {
         <TicketList />
       </main>
       <Footer />
-      <AddButton />
+      {user && <AddButton />}
     </div>
   );
 }

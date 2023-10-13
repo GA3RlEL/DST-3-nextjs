@@ -1,3 +1,4 @@
+import AuthContextProvider from "./context/AuthContext";
 import CreateContextProvider from "./context/CreateContext";
 import TagsContextProvider from "./context/TagsContext";
 import "./globals.css";
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <TagsContextProvider>
-          <CreateContextProvider>{children}</CreateContextProvider>
-        </TagsContextProvider>
+        <AuthContextProvider>
+          <TagsContextProvider>
+            <CreateContextProvider>{children}</CreateContextProvider>
+          </TagsContextProvider>
+        </AuthContextProvider>
       </body>
     </html>
   );
