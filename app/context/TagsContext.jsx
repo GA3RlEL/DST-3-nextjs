@@ -65,6 +65,29 @@ export default function TagsContextProvider({ children }) {
 
   ////////////////////////////////////////
 
+  // Checking if tag already exist
+
+  const [isExist, setIsExist] = useState(false);
+
+  function checkIfExist() {
+    let exist = false;
+    tags.find((tag) => {
+      if (tag.name === tagName) exist = true;
+    });
+
+    if (exist) {
+      setIsExist(true);
+      return false;
+    } else return true;
+  }
+
+  function clearError() {
+    setError("");
+    setIsExist(false);
+  }
+
+  ///////////////////////////////////////
+
   const getTags = async () => {
     setLoading(true);
     try {
@@ -88,6 +111,9 @@ export default function TagsContextProvider({ children }) {
     try {
       setSending(true);
       e.preventDefault();
+      if (!checkIfExist()) {
+        throw new Error(`"${tagName}" tag already exist!`);
+      }
       await addDoc(collection(db, "tags"), {
         name: tagName,
         color,
@@ -95,6 +121,8 @@ export default function TagsContextProvider({ children }) {
       setSuccess(true);
       setTagName("");
       setColor("#000000");
+      setError(false);
+      setIsExist(false);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -135,6 +163,8 @@ export default function TagsContextProvider({ children }) {
         handleDelete,
         deleteLoading,
         cancelDelete,
+        isExist,
+        clearError,
       }}
     >
       {children}

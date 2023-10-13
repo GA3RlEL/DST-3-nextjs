@@ -6,6 +6,7 @@ import AddNotification from "./AddNotification";
 import Header from "../Components/Header";
 import TagsSection from "./TagsSection";
 import ConfirmDelete from "./ConfirmDelete";
+import ErrorDetect from "./ErrorDetect";
 
 export default function Tags() {
   return (
@@ -17,6 +18,7 @@ export default function Tags() {
       <Footer />
       <AddNotification>Tag</AddNotification>
       <ConfirmDelete />
+      <ErrorDetect></ErrorDetect>
     </div>
   );
 }

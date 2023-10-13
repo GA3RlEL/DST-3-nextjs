@@ -16,9 +16,9 @@ export default function TagsList() {
   return (
     <ul>
       {loading && <span>Loading...</span>}
-      {error && <span>{error}</span>}
+      {/* {error && <span>{error}</span>} */}
+      {/* Be aware that at some point it may to be recoverd */}
       {!loading &&
-        !error &&
         tags.map((tag) => (
           <li key={tag.id} className="flex  mb-4 justify-between">
             <div className="flex gap-4 items-center">

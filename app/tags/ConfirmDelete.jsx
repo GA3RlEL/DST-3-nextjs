@@ -4,14 +4,8 @@ import React from "react";
 import { useTagsContext } from "../context/TagsContext";
 
 export default function ConfirmDelete() {
-  const {
-    isDelete,
-    setIsDelete,
-    deleteName,
-    handleDelete,
-    deleteLoading,
-    cancelDelete,
-  } = useTagsContext();
+  const { isDelete, deleteName, handleDelete, deleteLoading, cancelDelete } =
+    useTagsContext();
 
   return (
     <div
