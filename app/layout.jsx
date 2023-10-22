@@ -1,6 +1,7 @@
 import AuthContextProvider from "./context/AuthContext";
 import CreateContextProvider from "./context/CreateContext";
 import TagsContextProvider from "./context/TagsContext";
+import { TaskContentProvider } from "./context/TaskContext";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
       <body className={montserrat.className}>
         <AuthContextProvider>
           <TagsContextProvider>
-            <CreateContextProvider>{children}</CreateContextProvider>
+            <CreateContextProvider>
+              <TaskContentProvider>{children}</TaskContentProvider>
+            </CreateContextProvider>
           </TagsContextProvider>
         </AuthContextProvider>
       </body>
