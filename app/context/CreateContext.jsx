@@ -57,6 +57,16 @@ export default function CreateContextProvider({ children }) {
     setDate(e);
   }
 
+  function convertDateToTimestamp(dateString) {
+    const dateParts = dateString.split("/");
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1;
+    const year = parseInt(dateParts[2], 10);
+
+    const dateObject = new Date(year, month, day);
+    return dateObject.getTime();
+  }
+
   async function handleCreate(e) {
     try {
       setSending(true);
@@ -66,6 +76,7 @@ export default function CreateContextProvider({ children }) {
         body: details,
         date: date.format("DD/MM/YYYY"),
         tag: selectTag,
+        timestamp_create: convertDateToTimestamp(date.format("DD/MM/YYYY")),
       });
       setTitle("");
       setDate(dayjs());

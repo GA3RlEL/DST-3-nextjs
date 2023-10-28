@@ -4,7 +4,7 @@ import { useTask } from "../context/TaskContext";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function TaskItem({ task }) {
+export default function TaskItem({ task, isPrevDate }) {
   const {
     isEditMode,
     handleSetEditTagId,
@@ -14,11 +14,13 @@ export default function TaskItem({ task }) {
     handleEditDateContent,
   } = useTask();
 
+  console.log(isPrevDate);
+
   return (
     <>
       <li className={`flex items-center justify-between`}>
         <div>
-          <h3>{task.date}</h3>
+          {!isPrevDate && <h3>{task.date}</h3>}
           <div className="grid grid-cols-taksItemCol grid-rows-2 gap-x-3">
             <h4 className="font-bold">{task.tag}</h4>
             <h4 className="font-bold">{task.title}</h4>

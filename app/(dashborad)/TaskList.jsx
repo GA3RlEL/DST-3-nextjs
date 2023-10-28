@@ -9,6 +9,9 @@ import { useTask } from "../context/TaskContext";
 export default function TaskList() {
   const { tasks, loading, error } = useTask();
 
+  let isPrevDate = false;
+  let prevDate = 3;
+
   return (
     <ul
       className={` ${
@@ -19,7 +22,16 @@ export default function TaskList() {
       {loading && <TailSpin />}
       {!error &&
         !loading &&
-        tasks.map((task) => <TaskItem key={task.id} task={task} />)}
+        tasks.map((task) => {
+          if (prevDate === task.timestamp_create) {
+            isPrevDate = true;
+            prevDate = task.timestamp_create;
+          } else {
+            isPrevDate = false;
+            prevDate = task.timestamp_create;
+          }
+          return <TaskItem isPrevDate={isPrevDate} key={task.id} task={task} />;
+        })}
     </ul>
   );
 }

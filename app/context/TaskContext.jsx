@@ -25,7 +25,10 @@ export function TaskContentProvider({ children }) {
     const getData = async () => {
       setIsLoading(true);
       try {
-        const q = query(collection(db, "tasks"), orderBy("date", "asc"));
+        const q = query(
+          collection(db, "tasks"),
+          orderBy("timestamp_create", "asc")
+        );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
           let tasksArr = [];
 
@@ -92,7 +95,11 @@ export function TaskContentProvider({ children }) {
   // Taking and updating date
   const [editDateContent, setEditDateContent] = useState("");
   function handleEditDateContent(e) {
-    const date = new Date(e.split("/")[2], e.split("/")[1], e.split("/")[0]);
+    const date = new Date(
+      e.split("/")[2],
+      e.split("/")[1] - 1,
+      e.split("/")[0]
+    );
     setEditDateContent(dayjs(date));
   }
   function updateDateContent(e) {
@@ -107,6 +114,16 @@ export function TaskContentProvider({ children }) {
 
   /////////////////////////////////
 
+  function convertDateToTimestamp(dateString) {
+    const dateParts = dateString.split("/");
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1;
+    const year = parseInt(dateParts[2], 10);
+
+    const dateObject = new Date(year, month, day);
+    return dateObject.getTime();
+  }
+
   async function updateTask(e) {
     setSendingError("");
     e.preventDefault();
@@ -118,6 +135,9 @@ export function TaskContentProvider({ children }) {
         body: editBodyContent,
         tag: editTagContent,
         date: editDateContent.format("DD/MM/YYYY"),
+        timestamp_create: convertDateToTimestamp(
+          editDateContent.format("DD/MM/YYYY")
+        ),
       });
       setSuccess(true);
       resetContents();
