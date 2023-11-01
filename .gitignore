@@ -36,3 +36,5 @@ next-env.d.ts
 
 # org
 DST_3.org
+
+.env

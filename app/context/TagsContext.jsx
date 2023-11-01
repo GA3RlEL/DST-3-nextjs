@@ -1,6 +1,6 @@
 "use client";
 
-const { createContext, useContext, useState } = require("react");
+const { createContext, useContext, useState, useEffect } = require("react");
 
 import {
   addDoc,
@@ -8,7 +8,6 @@ import {
   onSnapshot,
   query,
   deleteDoc,
-  where,
   doc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
@@ -106,6 +105,10 @@ export default function TagsContextProvider({ children }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    getTags();
+  }, []);
 
   async function handleCreate(e) {
     try {

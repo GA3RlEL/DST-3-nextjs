@@ -7,6 +7,7 @@ import Overlay from "../Components/Overlay";
 import { useUserContext } from "../context/AuthContext";
 import { useTask } from "../context/TaskContext";
 import AddNotification from "./AddNotification";
+import ConfirmDelete from "./ConfirmDelete";
 import EditTaskForm from "./EditTaskForm";
 import TicketList from "./TaskList";
 
@@ -25,6 +26,7 @@ export default function Home() {
       </div>
 
       <EditTaskForm />
+      <ConfirmDelete />
       <AddNotification />
       <Overlay />
     </>

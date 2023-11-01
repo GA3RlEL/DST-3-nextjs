@@ -11,6 +11,7 @@ import {
   orderBy,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const TaskContext = createContext(null);
@@ -155,6 +156,45 @@ export function TaskContentProvider({ children }) {
 
   ////////////////////////////////
 
+  // Delete Logic
+  const [isDelete, setIsDelete] = useState(false);
+  const [deleteName, setDeleteName] = useState("");
+  const [deleteId, setDeleteId] = useState(null);
+
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+
+  function takeItemToDelete(id, name) {
+    setIsDelete(true);
+    setDeleteName(name);
+    setDeleteId(id);
+  }
+
+  async function handleDelete() {
+    if (!deleteId) return;
+    try {
+      setDeleteLoading(true);
+      const docRef = doc(db, "tasks", deleteId);
+      await deleteDoc(docRef);
+    } catch (error) {
+      setDeleteError(error);
+      console.log(error);
+    } finally {
+      setDeleteLoading(false);
+      setIsDelete(false);
+      setDeleteName("");
+      setDeleteId("");
+    }
+  }
+
+  function cancelDelete() {
+    setIsDelete(false);
+    setDeleteName("");
+    setDeleteId("");
+  }
+
+  /////////////////////////////////////////////////////
+
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
@@ -198,6 +238,12 @@ export function TaskContentProvider({ children }) {
         updateTask,
         handleCloseSuccess,
         success,
+        isDelete,
+        deleteName,
+        deleteLoading,
+        takeItemToDelete,
+        handleDelete,
+        cancelDelete,
       }}
     >
       {children}
