@@ -31,11 +31,23 @@ export default function EditTaskForm() {
     editDateContent,
     sending,
     updateTask,
+    handleEditTagContent,
   } = useTask();
 
   useEffect(() => {
     getTags();
   }, []);
+
+  function checkIsTag() {
+    if (!editTagContent) return "";
+    const tagsTable = tags.map((el) => el.name);
+    const include = tagsTable.includes(editTagContent);
+    if (include) return editTagContent;
+    if (!include) {
+      handleEditTagContent("");
+      return editTagContent;
+    }
+  }
 
   return (
     <Box
@@ -52,7 +64,7 @@ export default function EditTaskForm() {
               <InputLabel id="tag">Tag</InputLabel>
               <Select
                 required
-                value={editTagContent}
+                value={checkIsTag()}
                 label="Tag"
                 onChange={updateTagContent}
               >

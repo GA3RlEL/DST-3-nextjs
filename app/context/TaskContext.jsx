@@ -1,6 +1,12 @@
 "use client";
 
-const { createContext, useContext, useState, useEffect } = require("react");
+const {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} = require("react");
 
 import dayjs from "dayjs";
 import { db } from "../firebase/firebase";
@@ -51,7 +57,11 @@ export function TaskContentProvider({ children }) {
 
   // edit mode
 
-  const [isEditMode, setIsEditMode] = useState(true); // generally mode making visible icons
+  const [isEditMode, setIsEditMode] = useState(false); // generally mode making visible icons
+
+  function handleIsEditMode() {
+    setIsEditMode((mode) => !mode);
+  }
 
   ///////////////////////////////////////
 
@@ -244,6 +254,7 @@ export function TaskContentProvider({ children }) {
         takeItemToDelete,
         handleDelete,
         cancelDelete,
+        handleIsEditMode,
       }}
     >
       {children}

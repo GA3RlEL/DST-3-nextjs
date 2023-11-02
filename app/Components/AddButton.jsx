@@ -6,12 +6,15 @@ import TagIcon from "@mui/icons-material/Tag";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TaskIcon from "@mui/icons-material/Task";
 import Link from "next/link";
+import { useTask } from "../context/TaskContext";
 
 export default function AddButton() {
   const [visible, setVisible] = useState(true);
   const [clicked, setClicked] = useState(false);
 
   const prevScrollY = useRef(0);
+
+  const { handleIsEditMode } = useTask();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,12 +54,14 @@ export default function AddButton() {
             : "invisible opacity-0 -scale-50"
         }`}
       >
-        <li className="flex items-center justify-center gap-4 min-w-[92px] ">
-          Edit
-          <div className="bg-btn-primary rounded-full  p-2 felx items-center">
-            <ModeEditIcon className="text-2xl" />
-          </div>
-        </li>
+        <button onClick={handleIsEditMode}>
+          <li className="flex items-center justify-center gap-4 min-w-[92px] ">
+            Edit
+            <div className="bg-btn-primary rounded-full  p-2 felx items-center">
+              <ModeEditIcon className="text-2xl" />
+            </div>
+          </li>
+        </button>
         <Link href="/tags">
           <li className="flex items-center gap-4 min-w-[92px] justify-center">
             Tag

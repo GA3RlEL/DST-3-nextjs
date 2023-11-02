@@ -118,7 +118,7 @@ export default function TagsContextProvider({ children }) {
         throw new Error(`"${tagName}" tag already exist!`);
       }
       await addDoc(collection(db, "tags"), {
-        name: tagName,
+        name: tagName.toUpperCase(),
         color,
       });
       setSuccess(true);

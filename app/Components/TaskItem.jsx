@@ -20,8 +20,6 @@ export default function TaskItem({ task, isPrevDate }) {
 
   const found = tags.find((tag) => tag.name === task.tag)?.color;
 
-  console.log(found);
-
   return (
     <>
       <li className={`flex items-center justify-between`}>
