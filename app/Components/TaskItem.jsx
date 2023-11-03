@@ -5,7 +5,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTagsContext } from "../context/TagsContext";
 
-export default function TaskItem({ task, isPrevDate }) {
+export default function TaskItem({ task, isPrevDate, isToday }) {
   const {
     isEditMode,
     handleSetEditTagId,
@@ -24,7 +24,7 @@ export default function TaskItem({ task, isPrevDate }) {
     <>
       <li className={`flex items-center justify-between`}>
         <div>
-          {!isPrevDate && <h3>{task.date}</h3>}
+          {!isPrevDate && <h3>{isToday ? "Today" : task.date}</h3>}
           <div className="grid grid-cols-taksItemCol grid-rows-2 gap-x-3">
             <h4
               className="font-bold"

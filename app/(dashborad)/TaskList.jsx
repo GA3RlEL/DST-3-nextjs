@@ -10,11 +10,12 @@ export default function TaskList() {
   const { tasks, loading, error } = useTask();
 
   let isPrevDate = false;
+  let isToday = false;
   let prevDate = 3;
 
   const today = new Date();
-  const day = String(today.getDate()).padStart(2, "0"); // Dzień z wiodącym zerem
-  const month = String(today.getMonth() + 1).padStart(2, "0"); // Miesiąc z wiodącym zerem (months are zero-based)
+  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, "0");
   const year = today.getFullYear();
 
   const formattedDate = `${day}/${month}/${year}`;
@@ -37,6 +38,12 @@ export default function TaskList() {
         tasks.map((task) => {
           if (parseDate(task.date) < parseDate(formattedDate)) return;
 
+          if (formattedDate === task.date) {
+            isToday = true;
+          }
+          if (formattedDate !== task.date) {
+            isToday = false;
+          }
           if (prevDate === task.timestamp_create) {
             isPrevDate = true;
             prevDate = task.timestamp_create;
@@ -44,7 +51,14 @@ export default function TaskList() {
             isPrevDate = false;
             prevDate = task.timestamp_create;
           }
-          return <TaskItem isPrevDate={isPrevDate} key={task.id} task={task} />;
+          return (
+            <TaskItem
+              isPrevDate={isPrevDate}
+              isToday={isToday}
+              key={task.id}
+              task={task}
+            />
+          );
         })}
       {!error && !loading && tasks.length === 0 && (
         <h1 className="text-center ">
