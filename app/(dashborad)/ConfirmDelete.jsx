@@ -13,7 +13,7 @@ export default function ConfirmDelete() {
         !isDelete && "translate-y-20"
       } fixed bottom-0 w-full bg-red-500 py-4 px-2 flex justify-between text-white`}
     >
-      <span>Do you really want to delete "{deleteName}"?</span>
+      <span>Do you really want to delete - {deleteName}?</span>
       <div className="flex gap-4">
         <button
           onClick={handleDelete}

@@ -38,3 +38,6 @@ next-env.d.ts
 DST_3.org
 
 .env
+
+# Local Netlify folder
+.netlify
