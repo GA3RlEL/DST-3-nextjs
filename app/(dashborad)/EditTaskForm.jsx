@@ -87,7 +87,6 @@ export default function EditTaskForm() {
               onChange={updateBodyContent}
               multiline
               rows={4}
-              required
             />
             <div className="flex justify-between gap-4">
               <LocalizationProvider dateAdapter={AdapterDayjs}>

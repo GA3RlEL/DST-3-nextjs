@@ -25,7 +25,7 @@ export default function TaskItem({ task, isPrevDate, isToday }) {
       <li className={`flex items-center justify-between`}>
         <div>
           {!isPrevDate && <h3>{isToday ? "Today" : task.date}</h3>}
-          <div className="grid grid-cols-taksItemCol grid-rows-2 gap-x-3">
+          <div className="grid grid-cols-taksItemCol grid-rows-[1fr 1fr] gap-x-3">
             <h4
               className="font-bold"
               style={{ color: `${found ? found : "#000"}` }}
