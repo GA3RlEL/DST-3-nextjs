@@ -75,7 +75,7 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
       <li className={`flex items-center justify-between`}>
         <div>
           {!isPrevDate && (
-            <h3 className="my-2">
+            <h3 className="mt-5">
               {isToday ? "Today" : `${days[day - 1]}: ${task.date}`}
             </h3>
           )}

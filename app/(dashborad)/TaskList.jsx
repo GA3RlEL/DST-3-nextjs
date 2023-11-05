@@ -5,9 +5,10 @@ import React from "react";
 import TaskItem from "../Components/TaskItem";
 import { TailSpin } from "react-loader-spinner";
 import { useTask } from "../context/TaskContext";
+import { Island_Moments } from "next/font/google";
 
 export default function TaskList() {
-  const { tasks, loading, error } = useTask();
+  const { tasks, loading, error, isLoaded, hasTasks } = useTask();
 
   let isPrevDate = false;
   let isToday = false;
@@ -32,9 +33,9 @@ export default function TaskList() {
       }`}
     >
       {error && <div className="text-center">{error}</div>}
-      {loading && <TailSpin />}
+      {loading && !isLoaded && <TailSpin />}
       {!error &&
-        !loading &&
+        isLoaded &&
         tasks.map((task) => {
           if (parseDate(task.date) < parseDate(formattedDate)) return;
 
@@ -61,7 +62,7 @@ export default function TaskList() {
             />
           );
         })}
-      {!error && !loading && tasks.length === 0 && (
+      {!loading && !isLoaded && !hasTasks && (
         <h1 className="text-center ">
           There are no entries, enjoy free time dear students
         </h1>

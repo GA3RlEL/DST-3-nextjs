@@ -19,13 +19,14 @@ const TaskContext = createContext(null);
 export function TaskContentProvider({ children }) {
   // Basic funcionality (fetching data)
   const [tasks, setTasks] = useState([]);
-  const [loading, setIsLoading] = useState(false);
+  const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasTasks, setHasTasks] = useState(false);
   useEffect(() => {
     const getData = async () => {
-      setIsLoading(true);
       try {
+        setIsLoading(true);
         const q = query(
           collection(db, "tasks"),
           orderBy("timestamp_create", "asc")
@@ -36,7 +37,9 @@ export function TaskContentProvider({ children }) {
           querySnapshot.forEach((doc) => {
             tasksArr.push({ ...doc.data(), id: doc.id });
           });
+          setHasTasks(tasksArr.length > 0);
           setTasks(tasksArr);
+          setIsLoaded(true);
         });
       } catch (error) {
         setError(error.message);
@@ -249,6 +252,8 @@ export function TaskContentProvider({ children }) {
         handleDelete,
         cancelDelete,
         handleIsEditMode,
+        isLoaded,
+        hasTasks,
       }}
     >
       {children}

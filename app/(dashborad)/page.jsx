@@ -13,6 +13,7 @@ import TicketList from "./TaskList";
 
 export default function Home() {
   const { user } = useUserContext();
+  const { tasks, loading, error } = useTask();
   return (
     <>
       <div className="container max-w-full grid-rows-[auto_1fr_auto] relative">
