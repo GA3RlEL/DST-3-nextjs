@@ -5,8 +5,6 @@ import parse from "html-react-parser";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTagsContext } from "../context/TagsContext";
-import { split } from "postcss/lib/list";
-import Link from "./Link";
 
 export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
   const {
@@ -74,7 +72,9 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
       <li className={`flex items-center justify-between`}>
         <div>
           {!isPrevDate && (
-            <h3>{isToday ? "Today" : `${days[day - 1]}: ${task.date}`}</h3>
+            <h3 className="my-2">
+              {isToday ? "Today" : `${days[day - 1]}: ${task.date}`}
+            </h3>
           )}
           <div className="grid grid-cols-taksItemCol grid-rows-[1fr 1fr] gap-x-3">
             <h4
