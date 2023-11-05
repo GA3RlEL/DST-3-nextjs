@@ -8,7 +8,7 @@ import { useTagsContext } from "../context/TagsContext";
 import { split } from "postcss/lib/list";
 import Link from "./Link";
 
-export default function TaskItem({ task, isPrevDate, isToday }) {
+export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
   const {
     isEditMode,
     handleSetEditTagId,
@@ -18,6 +18,18 @@ export default function TaskItem({ task, isPrevDate, isToday }) {
     handleEditDateContent,
     takeItemToDelete,
   } = useTask();
+
+  const days = [
+    "Poniedziałek",
+    "Wtorek",
+    "Środa",
+    "Czwartek",
+    "Piątek",
+    "Sobota",
+    "Niedziela",
+  ];
+
+  const day = parsedDate.getDay();
 
   const { tags } = useTagsContext();
 
@@ -61,7 +73,9 @@ export default function TaskItem({ task, isPrevDate, isToday }) {
     <>
       <li className={`flex items-center justify-between`}>
         <div>
-          {!isPrevDate && <h3>{isToday ? "Today" : task.date}</h3>}
+          {!isPrevDate && (
+            <h3>{isToday ? "Today" : `${days[day - 1]}: ${task.date}`}</h3>
+          )}
           <div className="grid grid-cols-taksItemCol grid-rows-[1fr 1fr] gap-x-3">
             <h4
               className="font-bold"

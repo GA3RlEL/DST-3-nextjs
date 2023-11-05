@@ -55,6 +55,7 @@ export default function TaskList() {
             <TaskItem
               isPrevDate={isPrevDate}
               isToday={isToday}
+              parsedDate={parseDate(task.date)}
               key={task.id}
               task={task}
             />
