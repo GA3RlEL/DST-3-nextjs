@@ -13,12 +13,11 @@ import TicketList from "./TaskList";
 
 export default function Home() {
   const { user } = useUserContext();
-  const { isEditElement } = useTask();
   return (
     <>
       <div className="container max-w-full grid-rows-[auto_1fr_auto] relative">
         <Header />
-        <main className="break-all sm:max-w-sm max-w-md lg:max-w-3xl mx-auto mb-2 px-4 w-full relative">
+        <main className="sm:max-w-sm max-w-md lg:max-w-3xl mx-auto mb-2 px-4 w-full relative">
           <TicketList />
         </main>
         <Footer />

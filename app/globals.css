@@ -3,9 +3,22 @@
 @tailwind utilities;
 
 body {
-  @apply bg-white text-black h-screen;
+  @apply h-screen;
 }
 
 .container {
   @apply grid w-full h-screen;
+}
+
+[data-theme="dark"] .MuiTextField-root {
+  color: white !important;
+  background-color: red;
+}
+
+.textfield {
+  color: white;
+}
+
+.textfield__label {
+  color: white !important;
 }

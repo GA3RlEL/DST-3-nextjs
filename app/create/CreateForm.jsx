@@ -7,6 +7,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  makeStyles,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -62,6 +63,7 @@ export default function CreateForm() {
                 label="Title"
                 value={title}
                 onChange={handleTitle}
+                className="mui__label"
               />
             </div>
             <TextField
@@ -71,7 +73,7 @@ export default function CreateForm() {
               multiline
               rows={4}
             />
-            <div className="flex justify-between gap-4">
+            <div className=" flex justify-between gap-4">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   format="DD/MM/YYYY"

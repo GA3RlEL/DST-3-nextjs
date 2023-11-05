@@ -1,9 +1,6 @@
-import AuthContextProvider from "./context/AuthContext";
-import CreateContextProvider from "./context/CreateContext";
-import TagsContextProvider from "./context/TagsContext";
-import { TaskContentProvider } from "./context/TaskContext";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
+import Providers from "./providers";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -16,13 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <AuthContextProvider>
-          <TagsContextProvider>
-            <CreateContextProvider>
-              <TaskContentProvider>{children}</TaskContentProvider>
-            </CreateContextProvider>
-          </TagsContextProvider>
-        </AuthContextProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

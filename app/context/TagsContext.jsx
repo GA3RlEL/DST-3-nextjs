@@ -16,7 +16,7 @@ const TagsContext = createContext(null);
 
 export default function TagsContextProvider({ children }) {
   const [tagName, setTagName] = useState("");
-  const [color, setColor] = useState("#000000");
+  const [color, setColor] = useState("#534F92");
 
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -123,7 +123,7 @@ export default function TagsContextProvider({ children }) {
       });
       setSuccess(true);
       setTagName("");
-      setColor("#000000");
+      setColor("#534F92");
       setError(false);
       setIsExist(false);
     } catch (error) {
@@ -155,6 +155,7 @@ export default function TagsContextProvider({ children }) {
         tagName,
         color,
         handleColor,
+        setColor,
         handleTagName,
         handleCreate,
         success,

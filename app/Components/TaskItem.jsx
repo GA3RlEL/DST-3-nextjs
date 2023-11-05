@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { useTask } from "../context/TaskContext";
-import parse from "html-react-parser";
 
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -55,7 +54,11 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
         });
 
         indexesToChange.forEach((item) => {
-          splittedDetails[item.index] = <a href={item.link}>[LINK]</a>;
+          splittedDetails[item.index] = (
+            <a className="" href={item.link}>
+              [LINK]
+            </a>
+          );
         });
       });
     }
@@ -78,13 +81,13 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
           )}
           <div className="grid grid-cols-taksItemCol grid-rows-[1fr 1fr] gap-x-3">
             <h4
-              className="font-bold w-[5rem] self-center"
+              className="font-bold w-[5rem]"
               style={{ color: `${found ? found : "#000"}` }}
             >
               {task.tag}
             </h4>
             <h4 className="font-bold">{task.title}</h4>
-            <p className=" col-start-2 text-secondary-color">
+            <p className=" col-start-2 text-secondary-color text-overflow-ellipsis">
               {findLinks(task.body)}
             </p>
           </div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { useUserContext } from "../context/AuthContext";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Header({ children }) {
   const { logOut, user } = useUserContext();
@@ -10,7 +11,7 @@ export default function Header({ children }) {
   return (
     <header className="mb-1 py-4">
       <div className="flex justify-between items-center max-w-3xl mx-auto px-4">
-        <h1 className="font-bold text-2xl">K&K</h1>
+        <ThemeSwitcher />
         {children}
         {!user && (
           <Link href="/login">

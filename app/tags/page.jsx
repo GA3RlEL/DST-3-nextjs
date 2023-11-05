@@ -30,7 +30,9 @@ export default function Tags() {
   }, [router]);
 
   return (
-    <div className="h-screen grid grid-rows-[auto_1fr_auto]">
+    <div
+      className={`transition-colors h-screen grid grid-rows-[auto_1fr_auto] `}
+    >
       {render && (
         <>
           <Header>
