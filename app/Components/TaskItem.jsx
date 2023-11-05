@@ -78,7 +78,7 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
           )}
           <div className="grid grid-cols-taksItemCol grid-rows-[1fr 1fr] gap-x-3">
             <h4
-              className="font-bold"
+              className="font-bold w-[5rem] self-center"
               style={{ color: `${found ? found : "#000"}` }}
             >
               {task.tag}

@@ -16,7 +16,12 @@ export default function TagCreate() {
         value={color}
         onChange={handleColor}
       />
-      <TextField label="Tag name" value={tagName} onChange={handleTagName} />
+      <TextField
+        label="Tag name"
+        value={tagName}
+        onChange={handleTagName}
+        inputProps={{ maxLength: 4 }}
+      />
       <button
         disabled={sending}
         className={` transition-all uppercase px-6 py-2 border-solid border-green-600 border-2 rounded-md hover:text-white hover:bg-green-600 ${
