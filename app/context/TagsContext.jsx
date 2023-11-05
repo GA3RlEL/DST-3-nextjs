@@ -71,7 +71,7 @@ export default function TagsContextProvider({ children }) {
   function checkIfExist() {
     let exist = false;
     tags.find((tag) => {
-      if (tag.name === tagName) exist = true;
+      if (tag.name === tagName.toUpperCase()) exist = true;
     });
 
     if (exist) {

@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { useTask } from "../context/TaskContext";
+import parse from "html-react-parser";
 
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTagsContext } from "../context/TagsContext";
+import { split } from "postcss/lib/list";
+import Link from "./Link";
 
 export default function TaskItem({ task, isPrevDate, isToday }) {
   const {
@@ -20,6 +23,40 @@ export default function TaskItem({ task, isPrevDate, isToday }) {
 
   const found = tags.find((tag) => tag.name === task.tag)?.color;
 
+  function findLinks(detail) {
+    let splittedDetails = detail.split(" ");
+
+    let links = [];
+
+    splittedDetails.forEach((el) => {
+      if (el.startsWith("http")) links.push(el);
+    });
+
+    if (links.length > 0) {
+      links.forEach((link) => {
+        let indexesToChange = [];
+        splittedDetails.forEach((el, index) => {
+          if (el === link) {
+            indexesToChange.push({
+              link: el,
+              index,
+            });
+          }
+        });
+
+        indexesToChange.forEach((item) => {
+          splittedDetails[item.index] = <a href={item.link}>[LINK]</a>;
+        });
+      });
+    }
+
+    const parsedDetails = splittedDetails.map((element, index) => (
+      <Fragment key={index}>{element} </Fragment>
+    ));
+
+    return parsedDetails;
+  }
+
   return (
     <>
       <li className={`flex items-center justify-between`}>
@@ -33,7 +70,9 @@ export default function TaskItem({ task, isPrevDate, isToday }) {
               {task.tag}
             </h4>
             <h4 className="font-bold">{task.title}</h4>
-            <p className="col-start-2 text-secondary-color">{task.body}</p>
+            <p className=" col-start-2 text-secondary-color">
+              {findLinks(task.body)}
+            </p>
           </div>
         </div>
         {isEditMode && (

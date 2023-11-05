@@ -51,7 +51,7 @@ export default function EditTaskForm() {
 
   return (
     <Box
-      className={`z-50 w-full py-4 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${
+      className={`z-50 w-full py-4 flex items-center justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${
         isEditElement ? "visible opacity-100" : "invisible opacity-5"
       }`}
     >

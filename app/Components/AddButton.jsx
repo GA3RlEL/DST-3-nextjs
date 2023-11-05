@@ -81,7 +81,7 @@ export default function AddButton() {
       </ul>
       <div
         onClick={() => setClicked((click) => !click)}
-        className={`transition-all absolute w-screen h-screen top-0 left-0 bg-slate-700/50 z-20 ${
+        className={`transition-all fixed w-screen h-screen top-0 left-0 bg-slate-700/50 z-20 ${
           clicked ? "visible opacity-100" : "invisible opacity-0"
         }`}
       ></div>
