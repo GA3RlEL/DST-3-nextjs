@@ -4,6 +4,7 @@ import { useTask } from "../context/TaskContext";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTagsContext } from "../context/TagsContext";
+import { useUserContext } from "../context/AuthContext";
 
 export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
   const {
@@ -29,6 +30,7 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
   const day = parsedDate.getDay();
 
   const { tags } = useTagsContext();
+  const { user } = useUserContext();
 
   const found = tags.find((tag) => tag.name === task.tag)?.color;
 
@@ -92,7 +94,7 @@ export default function TaskItem({ task, isPrevDate, isToday, parsedDate }) {
             </p>
           </div>
         </div>
-        {isEditMode && (
+        {isEditMode === "true" && user && (
           <div className={`flex gap-3 `}>
             <button
               onClick={() => {

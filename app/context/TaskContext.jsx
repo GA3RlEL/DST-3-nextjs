@@ -54,10 +54,27 @@ export function TaskContentProvider({ children }) {
 
   // edit mode
 
-  const [isEditMode, setIsEditMode] = useState(false); // generally mode making visible icons
+  const [isEditMode, setIsEditMode] = useState(); // generally mode making visible icons
+
+  useEffect(() => {
+    const editFromLocalStorage = localStorage.getItem("edit");
+    if (editFromLocalStorage) {
+      setIsEditMode(editFromLocalStorage);
+    } else {
+      setIsEditMode(false);
+      localStorage.setItem("edit", false);
+    }
+  }, []);
 
   function handleIsEditMode() {
-    setIsEditMode((mode) => !mode);
+    if (isEditMode === "false") {
+      setIsEditMode("true");
+      localStorage.setItem("edit", "true");
+    }
+    if (isEditMode === "true") {
+      setIsEditMode("false");
+      localStorage.setItem("edit", "false");
+    }
   }
 
   ///////////////////////////////////////
