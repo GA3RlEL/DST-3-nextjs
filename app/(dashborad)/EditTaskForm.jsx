@@ -14,11 +14,14 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import React, { useEffect } from "react";
 import { useCreateContext } from "../context/CreateContext";
 import { useTask } from "../context/TaskContext";
+import { useThemeUI } from "../context/ThemeUIContext";
 
 export default function EditTaskForm() {
   const { getTags, loading, error, tags } = useCreateContext();
 
   const { isEditElement } = useTask();
+
+  const { mode } = useThemeUI();
 
   const {
     editTagContent,
@@ -58,7 +61,10 @@ export default function EditTaskForm() {
       {loading && <p>Loading ...</p>}
       {error && <p>{error}</p>}
       {!loading && !error && (
-        <form onSubmit={updateTask} className="bg-white p-8 rounded-md">
+        <form
+          onSubmit={updateTask}
+          className={`bg-white p-8 rounded-md ${mode === "dark" && "bg-black"}`}
+        >
           <FormControl className="grid grid-rows-[auto_auto_auto] gap-y-5">
             <div className="grid grid-cols-[1fr_3fr] gap-3">
               <InputLabel id="tag">Tag</InputLabel>

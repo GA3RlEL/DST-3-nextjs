@@ -11,8 +11,10 @@ import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "../../firebase/firebase";
+import { useThemeUI } from "@/app/context/ThemeUIContext";
 
 export default function Login() {
+  const { mode } = useThemeUI();
   const {
     loginEmail,
     loginPassword,
@@ -85,7 +87,9 @@ export default function Login() {
                     onChange={handleLoginEmail}
                     type="text"
                     placeholder="Type your email"
-                    className="bg-gray-200 w-80 p-3"
+                    className={`bg-gray-200 w-80  p-3 ${
+                      mode === "dark" && "text-black"
+                    }`}
                   />
                 </div>
 
@@ -95,7 +99,9 @@ export default function Login() {
                     onChange={handleLoginPassword}
                     type="password"
                     placeholder="Type your password"
-                    className="bg-gray-200 w-80 p-3"
+                    className={`bg-gray-200 w-80  p-3 ${
+                      mode === "dark" && "text-black"
+                    }`}
                   />
                 </div>
 
