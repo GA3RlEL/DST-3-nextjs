@@ -63,7 +63,9 @@ export default function EditTaskForm() {
       {!loading && !error && (
         <form
           onSubmit={updateTask}
-          className={`bg-white p-8 rounded-md ${mode === "dark" && "bg-black"}`}
+          className={`${mode === "light" && "bg-white"} p-8 rounded-md ${
+            mode === "dark" && "bg-black"
+          }`}
         >
           <FormControl className="grid grid-rows-[auto_auto_auto] gap-y-5">
             <div className="grid grid-cols-[1fr_3fr] gap-3">
