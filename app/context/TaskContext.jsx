@@ -67,7 +67,7 @@ export function TaskContentProvider({ children }) {
   }, []);
 
   function handleIsEditMode() {
-    if (isEditMode === "false") {
+    if (isEditMode === "false" || !isEditMode) {
       setIsEditMode("true");
       localStorage.setItem("edit", "true");
     }
