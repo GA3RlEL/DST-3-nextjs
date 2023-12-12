@@ -23,6 +23,10 @@ export function TaskContentProvider({ children }) {
   const [error, setError] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasTasks, setHasTasks] = useState(false);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -37,7 +41,15 @@ export function TaskContentProvider({ children }) {
           querySnapshot.forEach((doc) => {
             tasksArr.push({ ...doc.data(), id: doc.id });
           });
-          setHasTasks(tasksArr.length > 0);
+
+          const filtered = tasksArr.filter((task) => {
+            const [day, month, year] = task.date.split("/").map(Number);
+            const databaseDate = new Date(year, month - 1, day);
+            if (databaseDate >= today) {
+              return task;
+            }
+          });
+          setHasTasks(filtered.length === 0 ? false : true);
           setTasks(tasksArr);
           setIsLoaded(true);
         });

@@ -14,6 +14,8 @@ export default function TaskList() {
   let isToday = false;
   let prevDate = 3;
 
+  // console.log(`error: ${error} hasTasks: ${hasTasks}`);
+
   const today = new Date();
   const day = String(today.getDate()).padStart(2, "0");
   const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -62,7 +64,7 @@ export default function TaskList() {
             />
           );
         })}
-      {!loading && !isLoaded && !hasTasks && (
+      {!loading && !hasTasks && (
         <h1 className="text-center ">
           There are no entries, enjoy free time dear students
         </h1>
